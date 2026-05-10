@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ro"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoanEvaluator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">ProiectTestare</a> &gt; <a href="index.source.html" class="el_package">pachet.logica</a> &gt; <span class="el_source">LoanEvaluator.java</span></div><h1>LoanEvaluator.java</h1><pre class="source lang-java linenums">package pachet.logica;
+
+<span class="fc" id="L3">public class LoanEvaluator {</span>
+
+    /**
+     * Evaluează eligibilitatea unui client pentru un credit.
+     * @param age Vârsta solicitantului (ani)
+     * @param monthlyIncome Venitul lunar net (RON)
+     * @param creditScore Scorul de credit (300-850)
+     * @param activeLoans Numărul de credite active în prezent
+     * @return Statusul cererii: APPROVED, MANUAL_REVIEW sau REJECTED
+     */
+    public String evaluateEligibility(int age,
+                                      double monthlyIncome,
+                                      int creditScore,
+                                      int activeLoans) {
+
+<span class="fc" id="L18">        String result = &quot;REJECTED&quot;; // valoare implicită</span>
+
+        // buclă simplă cu 4 &quot;pași&quot; logici
+<span class="fc bfc" id="L21" title="All 2 branches covered.">        for (int step = 0; step &lt; 4; step++) {</span>
+
+<span class="fc bfc" id="L23" title="All 2 branches covered.">            if (step == 0) {</span>
+                // Condiție compusă (age &lt; 18 || age &gt; 70)
+<span class="fc bfc" id="L25" title="All 4 branches covered.">                if (age &lt; 18 || age &gt; 70) {</span>
+<span class="fc" id="L26">                    result = &quot;REJECTED&quot;;</span>
+<span class="fc" id="L27">                    break; // nu mai continuăm evaluarea</span>
+                }
+            }
+
+<span class="fc bfc" id="L31" title="All 2 branches covered.">            else if (step == 1) {</span>
+                // Condiție compusă (monthlyIncome &lt; 2000.0 || activeLoans &gt;= 3)
+<span class="fc bfc" id="L33" title="All 4 branches covered.">                if (monthlyIncome &lt; 2000.0 || activeLoans &gt;= 3) {</span>
+<span class="fc" id="L34">                    result = &quot;REJECTED&quot;;</span>
+<span class="fc" id="L35">                    break;</span>
+                }
+            }
+
+<span class="fc bfc" id="L39" title="All 2 branches covered.">            else if (step == 2) {</span>
+                // Condiție compusă pentru APPROVED
+<span class="pc bpc" id="L41" title="1 of 6 branches missed.">                if (creditScore &gt;= 700 &amp;&amp; monthlyIncome &gt;= 5000.0 &amp;&amp; activeLoans == 0) {</span>
+<span class="fc" id="L42">                    result = &quot;APPROVED&quot;;</span>
+<span class="fc" id="L43">                    break;</span>
+                }
+            }
+
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">            else if (step == 3) {</span>
+                // Aici folosim un if cu else (condiție simplă + compusă)
+<span class="fc bfc" id="L49" title="All 4 branches covered.">                if (creditScore &gt;= 600 &amp;&amp; activeLoans &lt;= 1) {</span>
+<span class="fc" id="L50">                    result = &quot;MANUAL_REVIEW&quot;;</span>
+                } else {
+                    // condiție simplă derivată: &quot;nu îndeplinește criteriul de revizuire&quot;
+                    // lăsăm result = &quot;REJECTED&quot;
+                }
+            }
+        }
+
+<span class="fc" id="L58">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="pachet.logica.LoanEvaluatorTest" time="0.102" tests="20" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1250"/>
+    <property name="java.class.path" value="C:\Users\alexa\OneDrive\Desktop\TSS\ProiectTestare\target\test-classes;C:\Users\alexa\OneDrive\Desktop\TSS\ProiectTestare\target\classes;C:\Users\alexa\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\alexa\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;C:\Users\alexa\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\alexa\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;C:\Users\alexa\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\alexa\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
+    <property name="java.vm.vendor" value="Eclipse Adoptium"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://adoptium.net/"/>
+    <property name="user.timezone" value="Europe/Bucharest"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="RO"/>
+    <property name="sun.boot.library.path" value="C:\Users\alexa\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916\jre\bin"/>
+    <property name="sun.java.command" value="C:\Users\alexa\AppData\Local\Temp\surefire5955146499460874200\surefirebooter-20260510222548875_3.jar C:\Users\alexa\AppData\Local\Temp\surefire5955146499460874200 2026-05-10T22-25-48_670-jvmRun1 surefire-20260510222548875_1tmp surefire_0-20260510222548875_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="C:\Users\alexa\OneDrive\Desktop\TSS\ProiectTestare\target\test-classes;C:\Users\alexa\OneDrive\Desktop\TSS\ProiectTestare\target\classes;C:\Users\alexa\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.2\junit-jupiter-engine-5.9.2.jar;C:\Users\alexa\.m2\repository\org\junit\platform\junit-platform-engine\1.9.2\junit-platform-engine-1.9.2.jar;C:\Users\alexa\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\alexa\.m2\repository\org\junit\platform\junit-platform-commons\1.9.2\junit-platform-commons-1.9.2.jar;C:\Users\alexa\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.2\junit-jupiter-api-5.9.2.jar;C:\Users\alexa\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\alexa"/>
+    <property name="user.language" value="ro"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="C:\Users\alexa\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916\jre"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="C:\Users\alexa\OneDrive\Desktop\TSS\ProiectTestare"/>
+    <property name="style.color" value="always"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="C:\Users\alexa\AppData\Local\Temp\surefire5955146499460874200\surefirebooter-20260510222548875_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.7+6-LTS"/>
+    <property name="user.name" value="alexa"/>
+    <property name="stdout.encoding" value="Cp1250"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Temurin-21.0.7+6"/>
+    <property name="localRepository" value="C:\Users\alexa\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/adoptium/adoptium-support/issues"/>
+    <property name="java.io.tmpdir" value="C:\Users\alexa\AppData\Local\Temp\"/>
+    <property name="java.version" value="21.0.7"/>
+    <property name="user.dir" value="C:\Users\alexa\OneDrive\Desktop\TSS\ProiectTestare"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1250"/>
+    <property name="java.library.path" value="C:\Users\alexa\.p2\pool\plugins\org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916\jre\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Users/alexa/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916/jre/bin/server;C:/Users/alexa/.p2/pool/plugins/org.eclipse.justj.openjdk.hotspot.jre.full.win32.x86_64_21.0.7.v20250502-0916/jre/bin;C:\Program Files (x86)\Common Files\Oracle\Java\java8path;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin;C:\Program Files\apache-maven-3.9.11\bin;C:\Python311\Scripts\;C:\Python311\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\ProgramData\chocolatey\bin;C:\mingw64\bin;C:\Program Files (x86)\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\Program Files\Git\cmd;C:\Program Files\CMake\bin;C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\;C:\Program Files\dotnet\;C:\Program Files\Eclipse Adoptium\jdk-21.0.5.11-hotspot\bin;C:\Users\alexa\AppData\Local\Microsoft\WindowsApps;C:\Users\alexa\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\alexa\AppData\Roaming\npm;C:\ghcup\bin;C:\Program Files\poppler-24.08.0\Library\bin;;C:\WINDOWS\system32;;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1250"/>
+    <property name="java.vendor" value="Eclipse Adoptium"/>
+    <property name="java.vm.version" value="21.0.7+6-LTS"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+  </properties>
+  <testcase name="testCreditScoreLowRejected" classname="pachet.logica.LoanEvaluatorTest" time="0.034"/>
+  <testcase name="testCreditScoreHighApproved" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testCreditScoreAtBoundaryWithOneLoanManualReview" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testAgeTooOld" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testAlmostApprovedButWithActiveLoan" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testTwoActiveLoansWithMediumScoreRejected" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testIncomeTooLow" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testAgeTooYoung" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testIncomeMediumManualReview" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testTooManyActiveLoansRejected" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testIncomeAtMinimumButTooManyLoansRejected" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testBoundaryAgeExactly18" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testBoundaryAgeExactly70" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testOneActiveLoanManualReview" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testNoActiveLoansApproved" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testAgeValidMiddle" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testIncomeHighApproved" classname="pachet.logica.LoanEvaluatorTest" time="0.0"/>
+  <testcase name="testBoundaryIncomeExactly2000" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testBoundaryIncomeExactly5000" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+  <testcase name="testCreditScoreMediumManualReview" classname="pachet.logica.LoanEvaluatorTest" time="0.001"/>
+</testsuite>

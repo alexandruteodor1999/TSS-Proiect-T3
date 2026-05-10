@@ -1,0 +1,81 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  
+  <groupId>proiect.tss.tema3</groupId>
+  <artifactId>ProiectTestare</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <properties>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
+  <dependencies>
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-engine</artifactId>
+        <version>5.9.2</version>
+        <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <version>0.8.10</version>
+
+            <executions>
+                <!-- Ruleaza agentul JaCoCo la testare -->
+                <execution>
+                    <goals>
+                        <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+
+                <!-- Genereaza raportul dupa testare -->
+                <execution>
+                    <id>report</id>
+                    <phase>test</phase>
+                    <goals>
+                        <goal>report</goal>
+                    	</goals>
+                	</execution>
+            	</executions>
+        	</plugin>
+        	<plugin>
+				    <groupId>org.pitest</groupId>
+				    <artifactId>pitest-maven</artifactId>
+				    <version>1.15.0</version>
+				
+				    <dependencies>
+				        <!-- Suport pentru JUnit 5 -->
+				        <dependency>
+				            <groupId>org.pitest</groupId>
+				            <artifactId>pitest-junit5-plugin</artifactId>
+				            <version>1.2.2</version>
+				        </dependency>
+				    </dependencies>
+				
+				    <configuration>
+				        <!-- Clasa/clasele pe care vrei să le testezi cu mutații -->
+				        <targetClasses>
+				            <param>pachet.logica.*</param>
+				        </targetClasses>
+				
+				        <!-- Testele care vor fi rulate (pattern pe numele claselor de test) -->
+				        <targetTests>
+				            <param>pachet.logica.*Test</param>
+				        </targetTests>
+				
+				        <!-- Optional, pentru raport mai simplu -->
+				        <timestampedReports>false</timestampedReports>
+				    </configuration>
+			</plugin>
+    	</plugins>
+	</build>
+
+</project>
