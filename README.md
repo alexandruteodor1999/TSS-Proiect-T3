@@ -37,7 +37,7 @@ Metoda întoarce unul dintre următoarele string-uri:
 - `MANUAL_REVIEW` – cerere care trebuie analizată manual de un ofițer;  
 - `REJECTED` – cerere respinsă.
 
-### 1.2. Reguli de business (specificație în cuvinte)
+### 1.2. Reguli
 
 Regulile după care se ia decizia sunt:
 
