@@ -203,8 +203,6 @@ Toate aceste teste sunt implementate ca metode `@Test` în `LoanEvaluatorTest`.
 
 În testarea structurală (white-box) am analizat implementarea efectivă a metodei `evaluateEligibility` și am generat date de test pornind de la structura codului, nu de la specificație. Am folosit graful de flux de control (CFG) ca bază pentru definirea criteriilor de acoperire.
 
-***
-
 ### 4.1. Graful de flux de control (CFG)
 
 Programul este transformat într-un graf orientat în care fiecare nod reprezintă o instrucțiune sau o secvență de instrucțiuni, iar fiecare arc reprezintă un transfer de control. Convenția urmată este cea din curs: noduri dreptunghiulare pentru instrucțiuni, noduri romb pentru decizii.
@@ -232,8 +230,6 @@ Programul este transformat într-un graf orientat în care fiecare nod reprezint
 - Arce (e) = 14
 - Complexitate ciclomatică: **V(G) = e − n + 2 = 14 − 11 + 2 = 5**
 
-***
-
 ### 4.2. Statement coverage (acoperire la nivel de instrucțiune)
 
 Statement coverage cere ca fiecare instrucțiune (nod din CFG) să fie executată cel puțin o dată.
@@ -251,8 +247,6 @@ Statement coverage cere ca fiecare instrucțiune (nod din CFG) să fie executat�
 Cu aceste 5 teste sunt parcurse toate nodurile N1–N11 → **100% statement coverage**.
 
 JaCoCo confirmă 100% instruction coverage pentru clasa `LoanEvaluator`.
-
-***
 
 ### 4.3. Branch coverage (acoperire la nivel de ramură)
 
@@ -282,8 +276,6 @@ Branch coverage este o extensie naturală a statement coverage: cere ca fiecare 
 | `testCreditScoreLowRejected()` | 30 | 5000.0 | 550 | 0 | `REJECTED` | D1-False, D2-False, D3-False, **D4-False** |
 
 Aceste 7 teste acoperă toate ramurile True și False ale celor 4 decizii → **100% branch coverage**.
-
-***
 
 ### 4.4. Condition coverage (acoperire la nivel de condiție)
 
@@ -332,12 +324,13 @@ se generează un raport în:
 target/site/jacoco/index.html
 ```
 
-În acest raport:
+**Raport JaCoCo – sumar:**
 
-- `LoanEvaluator` are 100% acoperire la nivel de instrucțiune;  
-- acoperirea la nivel de ramură este foarte bună (ramurile principale sunt acoperite de suitele de teste).
+![JaCoCo Summary](jacoco-summary.png)
 
-Raportul JaCoCo este util ca verificare independentă că testele scrise chiar trec prin logica de decizie și nu „uită” anumite ramuri.
+**Acoperire instrucțiuni în cod:**
+
+![JaCoCo Coverage](jacoco-coverage.png)
 
 ***
 
@@ -357,11 +350,17 @@ target/pit-reports/<timestamp>/index.html
 
 PIT introduce mutanți în cod (de exemplu schimbări de operatori, inversări de condiții etc.) și verifică dacă testele îi detectează.
 
-Rezultatele, pe scurt:
+**Raport PIT – sumar:**
 
-- majoritatea mutanților au fost omorâți de testele existente;  
-- pentru câțiva mutanți supraviețuitori (de exemplu schimbări subtile la `>=` vs `>`), am adăugat teste suplimentare pe frontiere (cum ar fi `creditScore = 700` sau `activeLoans = 3`), pentru a-i omorî;  
-- după adăugarea testelor de frontieră, mutation score-ul a crescut semnificativ, ceea ce arată că testele sunt sensibile la modificări în logica de decizie.
+![PIT Summary](pit-summary.png)
+
+**Acoperire linii cu mutanți:**
+
+![PIT Coverage](pit-coverage.png)
+
+**Detaliu mutații KILLED / SURVIVED:**
+
+![PIT Mutations](pit-mutations.png)
 
 ***
 
