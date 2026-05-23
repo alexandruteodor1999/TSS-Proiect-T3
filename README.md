@@ -201,62 +201,120 @@ Toate aceste teste sunt implementate ca metode `@Test` în `LoanEvaluatorTest`.
 
 ## 4. Testare structurală
 
-După partea de testare funcțională, am trecut la white-box, folosind implementarea efectivă a metodei `evaluateEligibility`.
+În testarea structurală (white-box) am analizat implementarea efectivă a metodei `evaluateEligibility` și am generat date de test pornind de la structura codului, nu de la specificație. Am folosit graful de flux de control (CFG) ca bază pentru definirea criteriilor de acoperire.
 
-### 4.1. Graful de flux de control (CFG) – descriere
+***
 
-Metoda este o secvență de condiții `if`:
+### 4.1. Graful de flux de control (CFG)
 
-1. verificarea vârstei (`age < 18 || age > 70`);  
-2. verificarea venitului și a numărului de credite (`monthlyIncome < 2000 || activeLoans >= 3`);  
-3. verificarea „clientului ideal” (`creditScore >= 700 && monthlyIncome >= 5000 && activeLoans == 0`);  
-4. verificarea „clientului de risc mediu” (`creditScore >= 600 && activeLoans <= 1`).
+Programul este transformat într-un graf orientat în care fiecare nod reprezintă o instrucțiune sau o secvență de instrucțiuni, iar fiecare arc reprezintă un transfer de control. Convenția urmată este cea din curs: noduri dreptunghiulare pentru instrucțiuni, noduri romb pentru decizii.
 
-Pentru fiecare `if` există o ramură True și una False, iar fiecare return este un nod de ieșire. CFG-ul respectă convențiile din curs (noduri numerotate și arce între ele).
+**Numerotarea nodurilor:**
 
-### 4.2. Statement coverage
+| Nod | Instrucțiune / Decizie |
+|-----|------------------------|
+| N1  | `String result = "REJECTED"` ← START |
+| N2  | `if (age < 18 \|\| age > 70)` ← D1 |
+| N3  | `result = "REJECTED"; break` (D1-True) |
+| N4  | `if (monthlyIncome < 2000.0 \|\| activeLoans >= 3)` ← D2 |
+| N5  | `result = "REJECTED"; break` (D2-True) |
+| N6  | `if (creditScore >= 700 && monthlyIncome >= 5000.0 && activeLoans == 0)` ← D3 |
+| N7  | `result = "APPROVED"; break` (D3-True) |
+| N8  | `if (creditScore >= 600 && activeLoans <= 1)` ← D4 |
+| N9  | `result = "MANUAL_REVIEW"` (D4-True) |
+| N10 | result rămâne `"REJECTED"` implicit (D4-False) |
+| N11 | `return result` ← EXIT |
 
-Statement coverage cere ca fiecare instrucțiune să fie executată cel puțin o dată. Cu testele T1–T7:
+![CFG LoanEvaluator](cfg.png)
 
-- sunt acoperite toate ramurile de return (`REJECTED`, `APPROVED`, `MANUAL_REVIEW`);  
-- toate `if`-urile sunt evaluate cel puțin o dată.
+**Metrici CFG:**
+- Noduri (n) = 11
+- Arce (e) = 14
+- Complexitate ciclomatică: **V(G) = e − n + 2 = 14 − 11 + 2 = 5**
 
-JaCoCo raportează 100% acoperire la nivel de instrucțiune pentru `LoanEvaluator`.
+***
 
-### 4.3. Branch coverage
+### 4.2. Statement coverage (acoperire la nivel de instrucțiune)
 
-Pentru branch coverage trebuie ca fiecare ramură True/False a fiecărui `if` să fie exercitată de cel puțin un test.
+Statement coverage cere ca fiecare instrucțiune (nod din CFG) să fie executată cel puțin o dată.
 
-Pe scurt:
+> **Criteriu**: Fiecare nod N1–N11 parcurs de cel puțin un test.
 
-- `if (age < 18 || age > 70)`  
-  - True: T1, T2;  
-  - False: T3, T4, T5, T6, T7.
+| Test | `age` | `income` | `score` | `loans` | Rezultat așteptat | Instrucțiuni parcurse |
+|------|-------|----------|---------|---------|-------------------|-----------------------|
+| `testAgeTooYoung()` | 17 | 5000.0 | 700 | 0 | `REJECTED` | N1, N2, **N3**, N11 |
+| `testIncomeTooLow()` | 30 | 1500.0 | 700 | 0 | `REJECTED` | N1, N2, N4, **N5**, N11 |
+| `testAgeValidMiddle()` | 30 | 5000.0 | 700 | 0 | `APPROVED` | N1, N2, N4, N6, **N7**, N11 |
+| `testIncomeMediumManualReview()` | 30 | 3000.0 | 650 | 1 | `MANUAL_REVIEW` | N1, N2, N4, N6, N8, **N9**, N11 |
+| `testCreditScoreLowRejected()` | 30 | 5000.0 | 550 | 0 | `REJECTED` | N1, N2, N4, N6, N8, **N10**, N11 |
 
-- `if (monthlyIncome < 2000 || activeLoans >= 3)`  
-  - True: T3 (venit mic), T4 (credite multe);  
-  - False: T1, T2, T5, T6, T7.
+Cu aceste 5 teste sunt parcurse toate nodurile N1–N11 → **100% statement coverage**.
 
-- `if (creditScore >= 700 && monthlyIncome >= 5000 && activeLoans == 0)`  
-  - True: T6;  
-  - False: T1, T2, T3, T4, T5, T7.
+JaCoCo confirmă 100% instruction coverage pentru clasa `LoanEvaluator`.
 
-- `if (creditScore >= 600 && activeLoans <= 1)`  
-  - True: T7;  
-  - False: T1, T2, T3, T4, T5, T6.
+***
 
-Acest set de teste acoperă toate ramurile importante din logică.
+### 4.3. Branch coverage (acoperire la nivel de ramură)
 
-### 4.4. Condition coverage – observație
+Branch coverage este o extensie naturală a statement coverage: cere ca fiecare ramură True și False a fiecărei decizii să fie exercitată de cel puțin un test.
 
-Fiecare condiție compusă are sub-condiții. De exemplu:
+> **Criteriu**: Fiecare arc din CFG (ramură True/False) parcurs cel puțin o dată.
 
-- `age < 18` / `age > 70`  
-- `monthlyIncome < 2000` / `activeLoans >= 3`  
-- `creditScore >= 700`, `monthlyIncome >= 5000`, `activeLoans == 0`  
-- `creditScore >= 600`, `activeLoans <= 1`
+**Deciziile și ramurile lor:**
 
-Prin combinația de teste, fiecare sub-condiție ajunge atât pe True, cât și pe False (ex.: există teste cu vârstă <18 și ≥18, cu venit sub și peste 2000, cu loans ≥3 și <3, etc.). Nu am pus toate într-un tabel detaliat, dar logica este aceeași ca în exemplul de la curs.
+| ID | Decizie | Ramură True | Ramură False |
+|----|---------|-------------|--------------|
+| D1 | `age < 18 \|\| age > 70` | → N3 (REJECTED + break) | → N4 |
+| D2 | `monthlyIncome < 2000.0 \|\| activeLoans >= 3` | → N5 (REJECTED + break) | → N6 |
+| D3 | `creditScore >= 700 && monthlyIncome >= 5000.0 && activeLoans == 0` | → N7 (APPROVED + break) | → N8 |
+| D4 | `creditScore >= 600 && activeLoans <= 1` | → N9 (MANUAL_REVIEW) | → N10 (REJECTED implicit) |
+
+**Tabel teste pentru branch coverage:**
+
+| Test | `age` | `income` | `score` | `loans` | Rezultat așteptat | Ramuri acoperite |
+|------|-------|----------|---------|---------|-------------------|-----------------|
+| `testAgeTooYoung()` | 17 | 5000.0 | 700 | 0 | `REJECTED` | **D1-True** |
+| `testAgeTooOld()` | 71 | 5000.0 | 700 | 0 | `REJECTED` | **D1-True** |
+| `testIncomeTooLow()` | 30 | 1500.0 | 700 | 0 | `REJECTED` | D1-False, **D2-True** |
+| `testTooManyActiveLoansRejected()` | 30 | 5000.0 | 720 | 3 | `REJECTED` | D1-False, **D2-True** |
+| `testAgeValidMiddle()` | 30 | 5000.0 | 700 | 0 | `APPROVED` | D1-False, D2-False, **D3-True** |
+| `testIncomeMediumManualReview()` | 30 | 3000.0 | 650 | 1 | `MANUAL_REVIEW` | D1-False, D2-False, D3-False, **D4-True** |
+| `testCreditScoreLowRejected()` | 30 | 5000.0 | 550 | 0 | `REJECTED` | D1-False, D2-False, D3-False, **D4-False** |
+
+Aceste 7 teste acoperă toate ramurile True și False ale celor 4 decizii → **100% branch coverage**.
+
+***
+
+### 4.4. Condition coverage (acoperire la nivel de condiție)
+
+Condition coverage cere ca fiecare sub-condiție individuală dintr-o decizie compusă să ia atât valoarea `True` cât și valoarea `False`.
+
+> **Criteriu**: Fiecare condiție atomică ia ambele valori în setul de teste.
+
+**Condiții atomice identificate:**
+
+| Decizie | Sub-condiții atomice |
+|---------|----------------------|
+| D1 | `age < 18` , `age > 70` |
+| D2 | `monthlyIncome < 2000.0` , `activeLoans >= 3` |
+| D3 | `creditScore >= 700` , `monthlyIncome >= 5000.0` , `activeLoans == 0` |
+| D4 | `creditScore >= 600` , `activeLoans <= 1` |
+
+**Tabel condition coverage** (T = True, F = False, — = nu se evaluează):
+
+| Test | `age<18` | `age>70` | `inc<2k` | `loans≥3` | `sc≥700` | `inc≥5k` | `loans=0` | `sc≥600` | `loans≤1` | Rezultat |
+|------|----------|----------|----------|-----------|----------|----------|-----------|----------|-----------|----------|
+| `testAgeTooYoung()` | **T** | F | — | — | — | — | — | — | — | REJECTED |
+| `testAgeTooOld()` | F | **T** | — | — | — | — | — | — | — | REJECTED |
+| `testIncomeTooLow()` | F | F | **T** | F | — | — | — | — | — | REJECTED |
+| `testTooManyActiveLoansRejected()` | F | F | F | **T** | — | — | — | — | — | REJECTED |
+| `testCreditScoreLowRejected()` | F | F | F | F | **F** | T | T | **F** | T | REJECTED |
+| `testAlmostApprovedButWithActiveLoan()` | F | F | F | F | T | T | **F** | T | T | MANUAL_REVIEW |
+| `testAgeValidMiddle()` | F | F | F | F | **T** | **T** | **T** | T | T | APPROVED |
+| `testIncomeMediumManualReview()` | F | F | F | F | F | **F** | F | **T** | **T** | MANUAL_REVIEW |
+| `testTwoActiveLoansWithMediumScoreRejected()` | F | F | F | F | F | F | F | T | **F** | REJECTED |
+
+Fiecare sub-condiție atomică ia ambele valori → **100% condition coverage**.
 
 ***
 
