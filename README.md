@@ -391,7 +391,7 @@ Pe parcursul proiectului am folosit un asistent AI de tip chatbot pentru:
 - idei de structură pentru teste și README;  
 - ajutor la configurarea unor tool-uri (Maven, JaCoCo, PIT, GitHub Actions).
 
-Codul, testele și deciziile finale îmi aparțin. Am folosit AI-ul mai degrabă ca „sparring partner” pentru idei și verificări rapide, nu ca generator automat de proiect complet. Am verificat manual tot ce am integrat în proiect și am validat cu JaCoCo și PIT că testele chiar acoperă logica din `LoanEvaluator`.
+Codul, testele și deciziile finale îmi aparțin. Am folosit AI-ul mai degrabă pentru idei, stilizarea codului și a acestui document, verificări rapide. Am verificat manual tot ce am integrat în proiect și am validat cu JaCoCo și PIT că testele chiar acoperă logica din `LoanEvaluator`.
 
 ***
 
